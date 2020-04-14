@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 16:24:20 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/14 17:27:48 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/14 17:30:36 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <sys/time.h>
 #include <pthread.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 # define NOTHING 0
 # define EAT 	1
@@ -28,8 +29,8 @@ typedef struct		s_philo
 	int				id;
 	int				eat_count;
 	int				state;
-	int				rfork_available;
-	int				lfork_available;
+	int				rfork; //id fourchette
+	int				lfork;
 }					t_philo;
 
 typedef struct s_data

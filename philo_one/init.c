@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 17:03:17 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/14 17:28:16 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/14 17:29:50 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static void init_philos(t_data *data)
 		data->philos[i].id = i;
 		data->philos[i].eat_count = 0;
 		data->philos[i].state = NOTHING;
-		data->philos[i].rfork_available = 1;
-		data->philos[i].lfork_available = 1;
+		data->philos[i].lfork = i;
+		data->philos[i].rfork = (i + 1) % data->number_of_philosophers;
 		i++;
 	}
 }
