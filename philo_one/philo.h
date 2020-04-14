@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 16:24:20 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/14 17:30:36 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/14 18:18:04 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define SLEEP  2
 # define THINK	3
 # define DIED 	4
+# define FULL	5 //must_eat_count reached
 
 typedef struct		s_philo
 {
@@ -49,7 +50,8 @@ int				ft_error(char *s);
 int		init_data(t_data *data, int argc, char **argv);
 void	ft_putstr(char *s);
 void	ft_putnbr(unsigned long n);
-int	ft_atoi(const char *str);
+int		ft_atoi(const char *str);
+int		free_data(t_data *data);
 
 
 #endif
