@@ -30,9 +30,9 @@ int main(void)
     printf("Waiting for the thread to end...\n");
 
     pthread_join(thread, NULL); // link the current thread process to another thread.
-	//It makes the program stops in order to wait for the end of the selected thread.
+	//It makes the program stops in order to wait for the end of the selected thread. sinon return 0 avant exec du thread.
 	//Mais le thread créé s'exécute dès la création. phthread_join ne sert qu'à attendre.
-	
+
     printf("Thread ended.\n");    
 
     return 0;
