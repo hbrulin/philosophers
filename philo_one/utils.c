@@ -6,11 +6,17 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 16:24:11 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/14 16:30:34 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/14 17:04:54 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int				ft_error(char *s)
+{
+	ft_putstr(s);
+	return (1);
+}
 
 unsigned long	get_timestamp(void)
 {

@@ -1,30 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils_lib.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/14 16:24:03 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/14 17:15:42 by hbrulin          ###   ########.fr       */
+/*   Created: 2020/04/14 17:06:23 by hbrulin           #+#    #+#             */
+/*   Updated: 2020/04/14 17:13:09 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <stdio.h> //rm
 
-/*void	*display(int id)
-
-
-*/
-
-int main(int argc, char **argv)
+int		ft_putchar(char c)
 {
-	t_data data;
-
-	if (argc < 5 || argc > 6)
-		return (ft_error("error: bad arguments\n"));
-	if (init_data(&data, argc, argv))
-		return (ft_error("error: bad arguments"));
+	write(1, &c, 1);
 	return (0);
+}
+
+void	ft_putnbr(unsigned long n)
+{
+	if (n >= 10)
+		ft_putnbr(n / 10);
+	ft_putchar(n % 10 + '0');
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
+
+void	ft_putstr(char *s)
+{
+	(write(1, s, ft_strlen(s)));
 }

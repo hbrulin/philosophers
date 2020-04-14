@@ -1,6 +1,6 @@
 NAME = philo_one
 
-SRCS = main.c utils.c
+SRCS = main.c utils.c utils_lib.c init.c
 BUILD_DIR = obj
 
 CFLAGS = -Wall -Werror -Wextra -MMD -g
