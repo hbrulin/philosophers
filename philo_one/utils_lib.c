@@ -6,11 +6,26 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 17:06:23 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/14 17:13:09 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/14 18:24:08 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	ft_bzero(void *s, size_t n)
+{
+	int		i;
+	char	*start;
+
+	i = 0;
+	start = s;
+	while (n)
+	{
+		start[i] = 0;
+		i++;
+		n--;
+	}
+}
 
 int		ft_putchar(char c)
 {

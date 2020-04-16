@@ -6,18 +6,20 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 16:24:11 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/14 18:00:52 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/16 14:50:29 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int		free_data(t_data *data)
+void	*ft_calloc(size_t len)
 {
-	if (data->philos)
-		free(data->philos);
-	//destroy mutexes
-	return (1);
+	void	*str;
+
+	if (!(str = malloc(len)))
+		return (NULL);
+	ft_bzero(str, len);
+	return (str);
 }
 
 int				ft_error(char *s)
