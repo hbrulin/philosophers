@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 16:24:03 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/16 17:59:11 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/16 18:03:21 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 	if (argc < 5 || argc > 6)
 		return (ft_error("error: bad arguments\n"));
 	if (init_data(&data, argc, argv))
-		return (ft_error("error: bad arguments\n")); //+free
+		return (ft_error("error: bad arguments\n"));
 	if (init_monitor(&data, &monitor) || init_philos(&data, &monitor))
 	{
 		free_monitor(&data, &monitor);

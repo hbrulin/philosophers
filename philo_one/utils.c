@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 16:24:11 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/16 18:00:33 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/16 18:06:06 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	free_monitor(t_data *data, t_monitor *monitor)
 		pthread_mutex_destroy(&monitor->forks[i++]);
 	i = 0;
 	pthread_mutex_destroy(&monitor->stdout_mutex);
-	free(monitor->forks);
+	if (monitor->forks)
+		free(monitor->forks);
 }
 
 void	*ft_calloc(size_t len)
