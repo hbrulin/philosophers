@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 15:02:01 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/16 15:55:47 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/16 16:06:00 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ void	eat(t_philo *philo)
 	pthread_mutex_lock(&philo->monitor->forks[(philo->id + 1) % philo->data->nb_philo]);
 	display(philo, FORK_IN_USE);
 	display(philo, EATING);
-	pthread_mutex_lock(&philo->monitor->eating_mutexes[philo->id]); //besoin de ça?
+	//pthread_mutex_lock(&philo->monitor->eating_mutexes[philo->id]); //besoin de ça?
 	philo->last_eat = get_timestamp();
 	usleep(philo->data->time_to_eat * 1000); 
 	pthread_mutex_unlock(&philo->monitor->forks[philo->id]);
 	pthread_mutex_unlock(&philo->monitor->forks[(philo->id + 1) % philo->data->nb_philo]);
-	pthread_mutex_unlock(&philo->monitor->eating_mutexes[philo->id]);
+	//pthread_mutex_unlock(&philo->monitor->eating_mutexes[philo->id]);
 }
 
 void	*routine(void *philo_void)
@@ -62,9 +62,9 @@ void	*routine(void *philo_void)
 	while (1)
 	{
 		eat(philo); //il mange avant de penser
-		display(philo, THINKING);
 		if (++i >= philo->data->must_eat_nb)
 			break ;
+		display(philo, THINKING);
 		display(philo, SLEEPING);
 		usleep(philo->data->time_to_sleep * 1000);
 	}

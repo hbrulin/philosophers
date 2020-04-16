@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 17:03:17 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/16 15:52:00 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/16 16:05:51 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	init_monitor(t_data *data, t_monitor *monitor)
 
 	if (!(monitor->forks = ft_calloc(sizeof(pthread_mutex_t) * data->nb_philo)))
 		return (ft_error("Error: malloc fail\n"));
-	if (!(monitor->eating_mutexes = ft_calloc(sizeof(pthread_mutex_t) * data->nb_philo)))
-		return (ft_error("Error: malloc fail\n"));
+	/*if (!(monitor->eating_mutexes = ft_calloc(sizeof(pthread_mutex_t) * data->nb_philo)))
+		return (ft_error("Error: malloc fail\n"));*/
 	if (pthread_mutex_init(&monitor->stdout_mutex, NULL) != 0) 
 		return(ft_error("Error: mutex initialization failed!\n"));
 	i = -1;
@@ -51,11 +51,11 @@ int	init_monitor(t_data *data, t_monitor *monitor)
 			return(ft_error("Error: mutex initialization failed!\n"));
 	}
 	i = -1;
-	while (++i < data->nb_philo)
+	/*while (++i < data->nb_philo)
 	{
 		if (pthread_mutex_init(&monitor->eating_mutexes[i], NULL) != 0) 
 			return(ft_error("Error: mutex initialization failed!\n"));
-	}
+	}*/
 	return (0);
 }
 

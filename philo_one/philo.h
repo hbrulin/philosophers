@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 16:24:20 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/16 15:53:29 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/16 16:05:36 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ typedef struct s_data
 typedef struct			s_monitor
 {
 	bool				stop;
-	pthread_mutex_t		stdout_mutex; //besoin de ça?
+	pthread_mutex_t		stdout_mutex;
 	pthread_mutex_t		*forks;
-	pthread_mutex_t		*eating_mutexes; //besoin de ça?
+	//pthread_mutex_t		*eating_mutexes; //besoin de ça?
 }						t_monitor;
 
 typedef struct		s_philo
@@ -55,8 +55,6 @@ typedef struct		s_philo
 	bool				stopped;
 	pthread_t			thread;
 	pthread_t			monitor_thread; //besoin de ça?
-	//eat_count?
-
 }					t_philo;
 
 unsigned long	get_timestamp(void);
