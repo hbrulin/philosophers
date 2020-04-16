@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 17:03:17 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/16 16:33:52 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/16 17:55:04 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ int	init_monitor(t_data *data, t_monitor *monitor)
 
 	if (!(monitor->forks = ft_calloc(sizeof(pthread_mutex_t) * data->nb_philo)))
 		return (ft_error("Error: malloc fail\n"));
-	/*if (!(monitor->eating_mutexes = ft_calloc(sizeof(pthread_mutex_t) * data->nb_philo)))
-		return (ft_error("Error: malloc fail\n"));*/
 	if (pthread_mutex_init(&monitor->stdout_mutex, NULL) != 0) 
 		return(ft_error("Error: mutex initialization failed!\n"));
 	i = -1;
@@ -51,17 +49,33 @@ int	init_monitor(t_data *data, t_monitor *monitor)
 			return(ft_error("Error: mutex initialization failed!\n"));
 	}
 	i = -1;
-	/*while (++i < data->nb_philo)
+	return (0);
+}
+
+int		check_value(char *s)
+{
+	while (*s)
 	{
-		if (pthread_mutex_init(&monitor->eating_mutexes[i], NULL) != 0) 
-			return(ft_error("Error: mutex initialization failed!\n"));
-	}*/
+		if (*s < '0' || *s > '9')
+			return (1);
+		s++;
+	}
 	return (0);
 }
 
 int		init_data(t_data *data, int argc, char **argv)
 {
-	data->nb_philo = ft_atoi(argv[1]);
+	int i;
+
+	i = 1;
+	while (argv[i])
+	{
+		if (check_value(argv[i]))
+			return (1);
+		i++;
+	}
+	if ((data->nb_philo = ft_atoi(argv[1])) < 1)
+		return (1);
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
@@ -69,8 +83,6 @@ int		init_data(t_data *data, int argc, char **argv)
 		data->must_eat_nb = ft_atoi(argv[5]);
 	else
 		data->must_eat_nb = 0;
-	if (data->nb_philo < 1 || data->must_eat_nb < 0) //autres cas? pour les autres pas possibles car unsigned long
-		return (1);
 	data->start = get_timestamp();
 	return (0);
 }

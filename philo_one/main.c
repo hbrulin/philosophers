@@ -6,12 +6,11 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 16:24:03 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/16 16:41:18 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/16 17:30:00 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <stdio.h> //rm
 
 bool	g_stop = 0;
 
