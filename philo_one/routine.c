@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 15:02:01 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/16 16:42:30 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/16 16:52:15 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,14 @@ void	*routine(void *philo_void)
 	{
 		eat(philo); //il mange avant de penser
 		if (++i >= philo->data->must_eat_nb)
+		{
+			display(philo, DONE);
+			g_stop = 1;
 			break;
+		}
 		display(philo, THINKING);
 		display(philo, SLEEPING);
 		usleep(philo->data->time_to_sleep * 1000);
 	}
-	display(philo, DONE);
-	g_stop = 1;
 	return (NULL);
 }
