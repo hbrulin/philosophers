@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 16:24:20 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/16 16:05:36 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/16 16:44:12 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+bool	g_stop;
+
 typedef enum			e_status
 {
 	EATING,
@@ -26,6 +28,7 @@ typedef enum			e_status
 	SLEEPING,
 	FORK_IN_USE,
 	DEAD,
+	DONE
 }						t_status;
 
 typedef struct s_data
@@ -40,7 +43,7 @@ typedef struct s_data
 
 typedef struct			s_monitor
 {
-	bool				stop;
+	//bool				stop;
 	pthread_mutex_t		stdout_mutex;
 	pthread_mutex_t		*forks;
 	//pthread_mutex_t		*eating_mutexes; //besoin de ça?
@@ -52,7 +55,7 @@ typedef struct		s_philo
 	t_data			*data;
 	t_monitor		*monitor;
 	unsigned long	last_eat;
-	bool				stopped;
+	//bool				stopped;
 	pthread_t			thread;
 	pthread_t			monitor_thread; //besoin de ça?
 }					t_philo;
