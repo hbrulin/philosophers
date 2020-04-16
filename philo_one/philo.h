@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 16:24:20 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/16 17:47:56 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/16 18:01:27 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void			*routine(void *philo_void);
 int				ft_monitor(t_philo *philo, int nb);
 int				ft_putchar(char c);
 void			display(const t_philo *philo, t_status status);
+void			free_monitor(t_data *data, t_monitor *monitor);
 
 
 #endif
