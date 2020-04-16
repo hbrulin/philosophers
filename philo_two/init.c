@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 17:03:17 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/16 18:58:07 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/16 19:03:10 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		init_philos(t_data *data, t_monitor *monitor)
 
 int	open_sesame(sem_t **sem, char *name, int ressources)
 {
-	//sem_unlink(name);
+	sem_unlink(name); //sinon semaphore persiste pour futures exec
 	*sem = sem_open(name, O_CREAT, 0666, ressources);
 	if (!*sem || *sem == SEM_FAILED)
 		return (ft_error("Error: semaphore not created\n"));
