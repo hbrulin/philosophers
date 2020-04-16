@@ -34,7 +34,12 @@ int pthread_mutex_destroy(pthread_mutex_t *mut);
 Que se passe-t'il si on ne détruit pas un mutex?
 
 #Sémaphore
-Permet de savoir l'état des ressources/de demander attente d'une ressource? 
+- open(N) : initialise le sémaphore à N "ressources"
+- wait() : demande une ressource. Si il n'y a plus de ressource libre, attend jusqu'à ce qu'une ressource se libère.
+- post() : libère une ressource
+
+Un sémaphore avec N=1 simule (un peu près) un mutex.
+Mais : un mutex doit être débloqué par le thread qui l'a bloqué.
 
 #Différence mutex/semaphores
 Le sémaphore est un mécanisme de signalisation, car les opérations wait () et signal () effectuées sur une variable sémaphore indiquent si un processus acquiert la ressource ou libère la ressource. D'autre part, le mutex est un mécanisme de verrouillage, car pour acquérir une ressource, un processus doit verrouiller l'objet mutex et tout en libérant un processus de ressource, il doit déverrouiller l'objet mutex.
@@ -55,3 +60,5 @@ there are two types of multitasking: process-based(philo three) and thread-based
 - https://openclassrooms.com/en/courses/
 - 1513891-la-programmation-systeme-en-c-sous-unix/1514567-les-threads 
 - https://franckh.developpez.com/tutoriels/posix/pthreads/
+- https://sites.uclouvain.be/SystInfo/notes/Theorie/html/Threads/coordination.html
+- https://perso.ens-lyon.fr/michael.rao/ASR2/cours_slides_8.pdf

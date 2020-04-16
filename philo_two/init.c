@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 17:03:17 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/16 18:48:04 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/16 18:58:07 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,20 @@ int		init_philos(t_data *data, t_monitor *monitor)
 	return (0);
 }
 
+int	open_sesame(sem_t **sem, char *name, int ressources)
+{
+	//sem_unlink(name);
+	*sem = sem_open(name, O_CREAT, 0666, ressources);
+	if (!*sem || *sem == SEM_FAILED)
+		return (ft_error("Error: semaphore not created\n"));
+	return (0);
+}
+
 int	init_monitor(t_data *data, t_monitor *monitor)
 {
-	int i;
-
-	if (!(monitor->forks = ft_calloc(sizeof(pthread_mutex_t) * data->nb_philo)))
-		return (ft_error("Error: malloc fail\n"));
-	if (pthread_mutex_init(&monitor->stdout_mutex, NULL) != 0) 
-		return(ft_error("Error: mutex initialization failed!\n"));
-	i = -1;
-	while (++i < data->nb_philo)
-	{
-		if (pthread_mutex_init(&monitor->forks[i], NULL) != 0) //protection mutex fourchettes
-			return(ft_error("Error: mutex initialization failed!\n"));
-	}
+	if (open_sesame(&monitor->forks, S_FORKS, data->nb_philo) ||
+		open_sesame(&monitor->stdout_sem, S_STDOUT, 1))
+		return (1);
 	return (0);
 }
 
