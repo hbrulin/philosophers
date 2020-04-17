@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 15:02:54 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/16 17:42:27 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/17 15:00:05 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	*monitor_routine(void *philo_void)
 			display(philo, DEAD);
 			g_stop = 1;
 		}
+		usleep(8 * 1000);
 	}
 	exit (0);
 	return (NULL);

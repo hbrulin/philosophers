@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 16:24:20 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/16 18:55:17 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/16 19:07:57 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ typedef struct			s_monitor
 
 typedef struct		s_philo
 {
-	int				id;
-	t_data			*data;
-	t_monitor		*monitor;
-	unsigned long	last_eat;
+	int					id;
+	t_data				*data;
+	t_monitor			*monitor;
+	unsigned long		last_eat;
 	pthread_t			thread;
 	pthread_t			monitor_thread;
 }					t_philo;
