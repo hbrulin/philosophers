@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 15:02:01 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/17 15:12:13 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/17 15:43:41 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ void	eat(t_philo *philo)
 	sem_post(philo->monitor->forks);
 }
 
-void	*routine(void *philo_void)
+int	routine(t_philo	*philo)
 {
-	t_philo	*philo;
 	int			i;
 
-	philo = philo_void;
 	i = 0;
+	if (pthread_create(&philo[i].monitor_thread, NULL, &monitor_routine, &philo[i]) != 0)
+		return(ft_error("Error: pthread create failed!\n"));
 	while (1)
 	{
 		eat(philo);
@@ -63,12 +63,13 @@ void	*routine(void *philo_void)
 		{
 			display(philo, DONE);
 			g_stop = 1;
-			usleep(8 * 1000);
+			//usleep(8 * 1000);
 			break;
 		}
 		display(philo, THINKING);
 		display(philo, SLEEPING);
 		usleep(philo->data->time_to_sleep * 1000);
 	}
-	return (NULL);
+	exit(0);
+	return (0);
 }

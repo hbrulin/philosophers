@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 15:02:54 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/17 15:13:37 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/17 15:44:57 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,26 @@ void	*monitor_routine(void *philo_void)
 			display(philo, DEAD);
 			g_stop = 1;
 		}
-		usleep(8 * 1000);
+		//usleep(8 * 1000);
 	}
 	exit (0);
 	return (NULL);
 }
 
-int		ft_monitor(t_philo *philo, int nb)
+int		ft_wait(t_philo *philo, int nb)
 {
+	int status;
 	int i;
 
-	i = -1;
-	while (++i < nb)
+	while (1)
 	{
-		if (pthread_create(&philo[i].monitor_thread, NULL, &monitor_routine, &philo[i]) != 0)
-			return(ft_error("Error: pthread create failed!\n"));
+		status = 0;
+		if (waitpid(-1, &status, 0) < 0 || WIFEXITED(status)) //si un process s'arrête, je kill tout le monde
+		{
+			i = -1;
+			while (++i < nb)
+				kill(philo[i].pid, SIGINT);
+			exit(WEXITSTATUS(status));
+		}
 	}
-	i = -1;
-	while (++i < nb)
-		pthread_join(philo[i].monitor_thread, NULL);
-	i = -1;
-	while (++i < nb)
-		pthread_join(philo[i].thread, NULL);
-	return (0);
 }
