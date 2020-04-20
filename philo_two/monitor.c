@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 15:02:54 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 13:31:01 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 13:59:04 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ void	*monitor_routine(void *philo_void)
 	philo = philo_void;
 	while (!g_stop)
 	{
+		sem_wait(philo->monitor->is_eating[philo->id]);
 		time = get_timestamp();
 		if (time - philo->last_eat > philo->data->time_to_die)
 		{
 			display(philo, DEAD);
 			g_stop = 1;
 		}
+		sem_post(philo->monitor->is_eating[philo->id]);
 		usleep(8 * 1000);
 	}
 	//exit (0);

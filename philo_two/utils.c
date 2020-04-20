@@ -6,16 +6,23 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 16:24:11 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/16 18:55:02 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 14:04:07 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	free_monitor(t_monitor *monitor)
+void	free_monitor(t_data *data, t_monitor *monitor)
 {
+	int i;
+
+	i = 0;
 	sem_close(monitor->forks);
 	sem_close(monitor->stdout_sem);
+	i = -1;
+	while (++i < data->nb_philo)
+		sem_close(monitor->is_eating[i]);
+	free(monitor->is_eating);
 }
 
 void	*ft_calloc(size_t len)
