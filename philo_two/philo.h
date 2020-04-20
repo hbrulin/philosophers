@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 16:24:20 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 14:04:26 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 16:17:07 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct			s_monitor
 	sem_t				*forks;
 	sem_t				*stdout_sem;
 	sem_t				**is_eating;
+	char				**names;
 }						t_monitor;
 
 typedef struct		s_philo
@@ -60,6 +61,7 @@ typedef struct		s_philo
 	unsigned long		last_eat;
 	pthread_t			thread;
 	pthread_t			monitor_thread;
+	int					total;
 }					t_philo;
 
 unsigned long	get_timestamp(void);
@@ -77,6 +79,7 @@ int				ft_monitor(t_philo *philo, int nb);
 int				ft_putchar(char c);
 void			display(const t_philo *philo, t_status status);
 void			free_monitor(t_data *data, t_monitor *monitor);
-
+void			ft_tabdel(void **tab);
+int				init_names(t_data *data, t_monitor *monitor);
 
 #endif

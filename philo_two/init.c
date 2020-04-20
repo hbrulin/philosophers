@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 17:03:17 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 14:07:08 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 16:32:05 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		init_philos(t_data *data, t_monitor *monitor)
 	while (++i < data->nb_philo)
 	{
 		philo[i] = (t_philo) { .id = i, .data = data, .monitor = monitor,
-			.last_eat = data->start };
+			.last_eat = data->start, .total = data->nb_philo };
 		if (pthread_create(&philo[i].thread, NULL, &routine, &philo[i]) != 0)
 			return(ft_error("Error: thread initialization failed!\n"));
 		usleep(100);
@@ -35,7 +35,7 @@ int		init_philos(t_data *data, t_monitor *monitor)
 
 int	open_sesame(sem_t **sem, char *name, int ressources)
 {
-	sem_unlink(name); //sinon semaphore persiste pour futures exec
+	sem_unlink(name); //pas besoin si j'exit bien
 	*sem = sem_open(name, O_CREAT, 0666, ressources);
 	if (!*sem || *sem == SEM_FAILED)
 		return (ft_error("Error: semaphore not created\n"));
@@ -44,7 +44,10 @@ int	open_sesame(sem_t **sem, char *name, int ressources)
 
 char *create_name()
 {
-	static char ret[3];
+	char *ret; 
+
+	if (!(ret = malloc(sizeof(char) * 4)))
+		return (NULL);
 	size_t i;
 	static char *alpha = "abcdefghijklmopqrstuvxyz";
 
@@ -54,7 +57,24 @@ char *create_name()
 		ret[i] = alpha[get_timestamp() % 26];
 		i++;
 	}
+	ret[i] = '\0';
 	return (ret);
+}
+
+int	init_names(t_data *data, t_monitor *monitor)	
+{
+	int i;
+
+	i = 0;
+	if (!(monitor->names = malloc(sizeof(char *) * data->nb_philo + 1)))
+		return (1);
+	while (i < data->nb_philo)
+	{
+		monitor->names[i] = create_name();
+		i++;
+	}
+	monitor->names[i] = NULL;
+	return (0);
 }
 
 int	init_monitor(t_data *data, t_monitor *monitor)
@@ -70,7 +90,7 @@ int	init_monitor(t_data *data, t_monitor *monitor)
 	i = -1;
 	while (++i < data->nb_philo)
 	{
-		if (open_sesame(&monitor->is_eating[i], create_name(), 1))
+		if (open_sesame(&monitor->is_eating[i], monitor->names[i], 1))
 			return (1);
 	}
 	return (0);

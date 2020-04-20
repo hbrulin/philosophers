@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 16:24:11 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 14:38:36 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 16:27:48 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	free_monitor(t_data *data, t_monitor *monitor)
 {
 	int i;
 	(void) data;
-	//(void)monitor;
-	sem_close(monitor->forks);
+	sem_unlink(S_FORKS);
 	i = -1;
-	/*while (++i < data->nb_philo)
-		sem_close(monitor->is_eating[i]);*/
+	while (++i < data->nb_philo)
+		sem_unlink(monitor->names[i]);
+	ft_tabdel((void *)monitor->names);
 	free(monitor->is_eating);
-	//sem_close(monitor->stdout_sem);
+	sem_unlink(S_STDOUT);
 	return ;
 }
 
