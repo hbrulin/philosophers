@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 17:06:23 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 16:30:25 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 16:42:21 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,7 @@ void	ft_tabdel(void **tab)
 	if (tab)
 	{
 		while (tab[i])
-		{
-			if (tab[i])
 				free(tab[i++]);
-		}
 		free(tab);
 	}
 }

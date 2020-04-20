@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 17:03:17 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/17 15:39:59 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 16:43:35 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,70 @@ int		init_philos(t_data *data, t_monitor *monitor)
 			routine(&philo[i]);
 		usleep(100);
 	}
-	if (ft_wait(philo, data->nb_philo))
-		return (1);
+	ft_wait(philo, data->nb_philo);
 	free(philo);
 	return (0);
 }
 
 int	open_sesame(sem_t **sem, char *name, int ressources)
 {
-	sem_unlink(name); //sinon semaphore persiste pour futures exec
+	sem_unlink(name); //voir si besoin
 	*sem = sem_open(name, O_CREAT, 0666, ressources);
 	if (!*sem || *sem == SEM_FAILED)
 		return (ft_error("Error: semaphore not created\n"));
 	return (0);
 }
 
+char *create_name()
+{
+	char *ret; 
+
+	if (!(ret = malloc(sizeof(char) * 4)))
+		return (NULL);
+	size_t i;
+	static char *alpha = "abcdefghijklmopqrstuvxyz";
+
+	i = 0;
+	while (i <= 2)
+	{
+		ret[i] = alpha[get_timestamp() % 26];
+		i++;
+	}
+	ret[i] = '\0';
+	return (ret);
+}
+
+int	init_names(t_data *data, t_monitor *monitor)	
+{
+	int i;
+
+	i = 0;
+	if (!(monitor->names = malloc(sizeof(char *) * data->nb_philo + 1)))
+		return (1);
+	while (i < data->nb_philo)
+	{
+		monitor->names[i] = create_name();
+		i++;
+	}
+	monitor->names[i] = NULL;
+	return (0);
+}
+
 int	init_monitor(t_data *data, t_monitor *monitor)
 {
+	int i;
+
 	if (open_sesame(&monitor->forks, S_FORKS, data->nb_philo) ||
 		open_sesame(&monitor->stdout_sem, S_STDOUT, 1))
 		return (1);
+	if (!(monitor->is_eating = ft_calloc(sizeof(sem_t *) * data->nb_philo)))
+		return (1);
+	i = -1;
+	while (++i < data->nb_philo)
+	{
+		if (open_sesame(&monitor->is_eating[i], monitor->names[i], 1))
+			return (1);
+	}
 	return (0);
 }
 

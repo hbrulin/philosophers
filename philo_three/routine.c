@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 15:02:01 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/17 15:43:41 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 16:39:32 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,12 @@ void	eat(t_philo *philo)
 	sem_wait(philo->monitor->forks);
 	display(philo, FORK_IN_USE);
 	display(philo, EATING);
+	sem_wait(philo->monitor->is_eating[philo->id]);
 	philo->last_eat = get_timestamp();
 	usleep(philo->data->time_to_eat * 1000); 
 	sem_post(philo->monitor->forks);
 	sem_post(philo->monitor->forks);
+	sem_post(philo->monitor->is_eating[philo->id]);
 }
 
 int	routine(t_philo	*philo)
@@ -63,7 +65,7 @@ int	routine(t_philo	*philo)
 		{
 			display(philo, DONE);
 			g_stop = 1;
-			//usleep(8 * 1000);
+			//usleep(8 * 1000); A VOIR
 			break;
 		}
 		display(philo, THINKING);

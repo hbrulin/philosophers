@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 16:24:11 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 16:27:48 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 16:38:08 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	free_monitor(t_data *data, t_monitor *monitor)
 {
 	int i;
-	(void) data;
 	sem_unlink(S_FORKS);
 	i = -1;
 	while (++i < data->nb_philo)

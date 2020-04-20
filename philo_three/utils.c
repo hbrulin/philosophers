@@ -6,16 +6,23 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 16:24:11 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/16 18:55:02 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 16:42:09 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	free_monitor(t_monitor *monitor)
+void	free_monitor(t_data *data, t_monitor *monitor)
 {
-	sem_close(monitor->forks);
-	sem_close(monitor->stdout_sem);
+	int i;
+	sem_unlink(S_FORKS);
+	i = -1;
+	while (++i < data->nb_philo)
+		sem_unlink(monitor->names[i]);
+	ft_tabdel((void *)monitor->names);
+	free(monitor->is_eating);
+	sem_unlink(S_STDOUT);
+	return ;
 }
 
 void	*ft_calloc(size_t len)
@@ -40,4 +47,17 @@ unsigned long	get_timestamp(void)
 
 	gettimeofday(&tv, NULL);
 	return (tv.tv_usec / 1000 + tv.tv_sec * 1000); //(secondes et microsecondes)
+}
+
+void	ft_tabdel(void **tab)
+{
+	int i;
+
+	i = 0;
+	if (tab)
+	{
+		while (tab[i])
+				free(tab[i++]);
+		free(tab);
+	}
 }
