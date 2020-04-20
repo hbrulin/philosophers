@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 15:02:01 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 14:01:12 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 17:13:51 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	display(const t_philo *philo, t_status status)
 {
 	sem_wait(philo->monitor->stdout_sem);
 	if (g_stop)
-		return;
+		return ;
 	ft_putnbr(get_timestamp());
 	ft_putchar(' ');
 	ft_putnbr(philo->id + 1);
@@ -35,7 +35,6 @@ void	display(const t_philo *philo, t_status status)
 	sem_post(philo->monitor->stdout_sem);
 }
 
-
 void	eat(t_philo *philo)
 {
 	sem_wait(philo->monitor->forks);
@@ -45,7 +44,7 @@ void	eat(t_philo *philo)
 	display(philo, EATING);
 	sem_wait(philo->monitor->is_eating[philo->id]);
 	philo->last_eat = get_timestamp();
-	usleep(philo->data->time_to_eat * 1000); 
+	usleep(philo->data->time_to_eat * 1000);
 	sem_post(philo->monitor->forks);
 	sem_post(philo->monitor->forks);
 	sem_post(philo->monitor->is_eating[philo->id]);
@@ -53,7 +52,7 @@ void	eat(t_philo *philo)
 
 void	*routine(void *philo_void)
 {
-	t_philo	*philo;
+	t_philo		*philo;
 	int			i;
 
 	philo = philo_void;
@@ -66,7 +65,7 @@ void	*routine(void *philo_void)
 			display(philo, DONE);
 			g_stop = 1;
 			usleep(8 * 1000);
-			break;
+			break ;
 		}
 		display(philo, THINKING);
 		display(philo, SLEEPING);

@@ -1,6 +1,6 @@
 NAME = philo_two
 
-SRCS = main.c utils.c utils_lib.c init.c ft_atoi.c routine.c monitor.c init_names.c
+SRCS = main.c utils.c utils_lib.c init.c utils_lib_two.c routine.c monitor.c init_names.c
 BUILD_DIR = obj
 
 CFLAGS = -Wall -Werror -Wextra -MMD -g

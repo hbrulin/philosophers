@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 17:06:23 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 16:42:21 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 17:14:59 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,4 @@ size_t	ft_strlen(const char *s)
 void	ft_putstr(char *s)
 {
 	(write(1, s, ft_strlen(s)));
-}
-
-void	ft_tabdel(void **tab)
-{
-	int i;
-
-	i = 0;
-	if (tab)
-	{
-		while (tab[i])
-				free(tab[i++]);
-		free(tab);
-	}
 }

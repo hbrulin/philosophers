@@ -6,15 +6,16 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 16:24:11 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 16:38:08 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 17:17:07 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	free_monitor(t_data *data, t_monitor *monitor)
+void			free_monitor(t_data *data, t_monitor *monitor)
 {
 	int i;
+
 	sem_unlink(S_FORKS);
 	i = -1;
 	while (++i < data->nb_philo)
@@ -25,7 +26,7 @@ void	free_monitor(t_data *data, t_monitor *monitor)
 	return ;
 }
 
-void	*ft_calloc(size_t len)
+void			*ft_calloc(size_t len)
 {
 	void	*str;
 
@@ -46,5 +47,5 @@ unsigned long	get_timestamp(void)
 	struct timeval tv;
 
 	gettimeofday(&tv, NULL);
-	return (tv.tv_usec / 1000 + tv.tv_sec * 1000); //(secondes et microsecondes)
+	return (tv.tv_usec / 1000 + tv.tv_sec * 1000);
 }

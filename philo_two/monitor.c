@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 15:02:54 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 15:52:51 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 17:09:51 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*monitor_routine(void *philo_void)
 {
-	t_philo		*philo;
+	t_philo			*philo;
 	unsigned long	time;
 
 	philo = philo_void;
@@ -30,7 +30,6 @@ void	*monitor_routine(void *philo_void)
 		sem_post(philo->monitor->is_eating[philo->id]);
 		usleep(8 * 1000);
 	}
-	//exit (0);
 	return (NULL);
 }
 
@@ -41,8 +40,9 @@ int		ft_monitor(t_philo *philo, int nb)
 	i = -1;
 	while (++i < nb)
 	{
-		if (pthread_create(&philo[i].monitor_thread, NULL, &monitor_routine, &philo[i]) != 0)
-			return(ft_error("Error: pthread create failed!\n"));
+		if (pthread_create(&philo[i].monitor_thread, NULL,
+			&monitor_routine, &philo[i]) != 0)
+			return (ft_error("Error: pthread create failed!\n"));
 	}
 	i = -1;
 	while (++i < nb)
