@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 15:02:01 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/17 15:05:07 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 12:35:21 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@ void	eat(t_philo *philo)
 	display(philo, FORK_IN_USE);
 	display(philo, EATING);
 	philo->last_eat = get_timestamp();
+	pthread_mutex_lock(&philo->monitor->is_eating[philo->id]);
 	usleep(philo->data->time_to_eat * 1000); 
 	pthread_mutex_unlock(&philo->monitor->forks[philo->id]);
 	pthread_mutex_unlock(&philo->monitor->forks[(philo->id + 1) % philo->data->nb_philo]);
+	pthread_mutex_unlock(&philo->monitor->is_eating[philo->id]);
 }
 
 void	*routine(void *philo_void)

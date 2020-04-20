@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 16:24:20 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/16 18:01:27 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 12:29:57 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct			s_monitor
 {
 	pthread_mutex_t		stdout_mutex;
 	pthread_mutex_t		*forks;
+	pthread_mutex_t		*is_eating;
 }						t_monitor;
 
 typedef struct		s_philo
