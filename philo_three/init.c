@@ -6,13 +6,13 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 17:03:17 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 16:43:35 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 17:26:23 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int		init_philos(t_data *data, t_monitor *monitor)
+int			init_philos(t_data *data, t_monitor *monitor)
 {
 	t_philo		*philo;
 	int			i;
@@ -33,7 +33,7 @@ int		init_philos(t_data *data, t_monitor *monitor)
 	return (0);
 }
 
-int	open_sesame(sem_t **sem, char *name, int ressources)
+int			open_sesame(sem_t **sem, char *name, int ressources)
 {
 	sem_unlink(name); //voir si besoin
 	*sem = sem_open(name, O_CREAT, 0666, ressources);
@@ -42,42 +42,7 @@ int	open_sesame(sem_t **sem, char *name, int ressources)
 	return (0);
 }
 
-char *create_name()
-{
-	char *ret; 
-
-	if (!(ret = malloc(sizeof(char) * 4)))
-		return (NULL);
-	size_t i;
-	static char *alpha = "abcdefghijklmopqrstuvxyz";
-
-	i = 0;
-	while (i <= 2)
-	{
-		ret[i] = alpha[get_timestamp() % 26];
-		i++;
-	}
-	ret[i] = '\0';
-	return (ret);
-}
-
-int	init_names(t_data *data, t_monitor *monitor)	
-{
-	int i;
-
-	i = 0;
-	if (!(monitor->names = malloc(sizeof(char *) * data->nb_philo + 1)))
-		return (1);
-	while (i < data->nb_philo)
-	{
-		monitor->names[i] = create_name();
-		i++;
-	}
-	monitor->names[i] = NULL;
-	return (0);
-}
-
-int	init_monitor(t_data *data, t_monitor *monitor)
+int			init_monitor(t_data *data, t_monitor *monitor)
 {
 	int i;
 
@@ -95,7 +60,7 @@ int	init_monitor(t_data *data, t_monitor *monitor)
 	return (0);
 }
 
-int		check_value(char *s)
+int			check_value(char *s)
 {
 	while (*s)
 	{
@@ -106,7 +71,7 @@ int		check_value(char *s)
 	return (0);
 }
 
-int		init_data(t_data *data, int argc, char **argv)
+int			init_data(t_data *data, int argc, char **argv)
 {
 	int i;
 

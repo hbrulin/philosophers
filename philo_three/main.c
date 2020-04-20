@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 16:24:03 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 16:41:06 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 17:27:49 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 bool	g_stop = 0;
 
-int main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
-	t_data data;
-	t_monitor monitor;
+	t_data		data;
+	t_monitor	monitor;
 
 	ft_bzero(&data, sizeof(t_data));
 	ft_bzero(&monitor, sizeof(t_monitor));

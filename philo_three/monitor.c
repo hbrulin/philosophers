@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 15:02:54 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 16:45:10 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 17:28:59 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*monitor_routine(void *philo_void)
 {
-	t_philo		*philo;
+	t_philo			*philo;
 	unsigned long	time;
 
 	philo = philo_void;
@@ -27,10 +27,10 @@ void	*monitor_routine(void *philo_void)
 			display(philo, DEAD);
 			g_stop = 1;
 		}
-		//usleep(8 * 1000);
+		//usleep(8 * 1000); a voir
 		sem_post(philo->monitor->is_eating[philo->id]);
 	}
-	exit (0);
+	exit(0);
 	return (NULL);
 }
 
@@ -42,12 +42,11 @@ int		ft_wait(t_philo *philo, int nb)
 	while (1)
 	{
 		status = 0;
-		if (waitpid(-1, &status, 0) < 0 || WIFEXITED(status)) //si un process s'arrête, je kill tout le monde
+		if (waitpid(-1, &status, 0) < 0 || WIFEXITED(status))
 		{
 			i = -1;
 			while (++i < nb)
 				kill(philo[i].pid, SIGINT);
-			//exit(WEXITSTATUS(status));
 			return (0);
 		}
 	}

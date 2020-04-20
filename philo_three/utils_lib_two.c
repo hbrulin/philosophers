@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   utils_lib_two.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 17:17:58 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/14 17:18:09 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 17:16:26 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_neg(int ctr, const char *str)
+int		ft_neg(int ctr, const char *str)
 {
 	if (str[ctr] == '-')
 		return (-1);
@@ -20,7 +20,7 @@ int	ft_neg(int ctr, const char *str)
 		return (1);
 }
 
-int	ft_atoi(const char *str)
+int		ft_atoi(const char *str)
 {
 	int nbr;
 	int ctr;
@@ -43,4 +43,17 @@ int	ft_atoi(const char *str)
 		ctr++;
 	}
 	return (nbr * neg);
+}
+
+void	ft_tabdel(void **tab)
+{
+	int i;
+
+	i = 0;
+	if (tab)
+	{
+		while (tab[i])
+			free(tab[i++]);
+		free(tab);
+	}
 }

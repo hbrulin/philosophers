@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 15:02:01 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 16:39:32 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 17:30:37 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	display(const t_philo *philo, t_status status)
 {
 	sem_wait(philo->monitor->stdout_sem);
 	if (g_stop)
-		return;
+		return ;
 	ft_putnbr(get_timestamp());
 	ft_putchar(' ');
 	ft_putnbr(philo->id + 1);
@@ -35,7 +35,6 @@ void	display(const t_philo *philo, t_status status)
 	sem_post(philo->monitor->stdout_sem);
 }
 
-
 void	eat(t_philo *philo)
 {
 	sem_wait(philo->monitor->forks);
@@ -45,19 +44,20 @@ void	eat(t_philo *philo)
 	display(philo, EATING);
 	sem_wait(philo->monitor->is_eating[philo->id]);
 	philo->last_eat = get_timestamp();
-	usleep(philo->data->time_to_eat * 1000); 
+	usleep(philo->data->time_to_eat * 1000);
 	sem_post(philo->monitor->forks);
 	sem_post(philo->monitor->forks);
 	sem_post(philo->monitor->is_eating[philo->id]);
 }
 
-int	routine(t_philo	*philo)
+int		routine(t_philo *philo)
 {
 	int			i;
 
 	i = 0;
-	if (pthread_create(&philo[i].monitor_thread, NULL, &monitor_routine, &philo[i]) != 0)
-		return(ft_error("Error: pthread create failed!\n"));
+	if (pthread_create(&philo[i].monitor_thread, NULL,
+		&monitor_routine, &philo[i]) != 0)
+		return (ft_error("Error: pthread create failed!\n"));
 	while (1)
 	{
 		eat(philo);
@@ -66,7 +66,7 @@ int	routine(t_philo	*philo)
 			display(philo, DONE);
 			g_stop = 1;
 			//usleep(8 * 1000); A VOIR
-			break;
+			break ;
 		}
 		display(philo, THINKING);
 		display(philo, SLEEPING);
