@@ -6,13 +6,13 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 17:03:17 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 13:12:56 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 16:52:18 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int		init_philos(t_data *data, t_monitor *monitor)
+int			init_philos(t_data *data, t_monitor *monitor)
 {
 	t_philo		*philo;
 	int			i;
@@ -25,45 +25,41 @@ int		init_philos(t_data *data, t_monitor *monitor)
 		philo[i] = (t_philo) { .id = i, .data = data, .monitor = monitor,
 			.last_eat = data->start };
 		if (pthread_create(&philo[i].thread, NULL, &routine, &philo[i]) != 0)
-			return(ft_error("Error: thread initialization failed!\n"));
-		usleep(100); //voir poru ça
+			return (ft_error("Error: thread initialization failed!\n"));
+		usleep(100);
 	}
-	/*if (ft_monitor(philo, data->nb_philo))
-	{
-		free(philo);
-		return (1);
-	}*/
 	ft_monitor(philo, data->nb_philo);
 	free(philo);
 	return (0);
 }
 
-int	init_monitor(t_data *data, t_monitor *monitor)
+int			init_monitor(t_data *data, t_monitor *monitor)
 {
 	int i;
 
 	if (!(monitor->forks = ft_calloc(sizeof(pthread_mutex_t) * data->nb_philo)))
 		return (ft_error("Error: malloc fail\n"));
-	if (!(monitor->is_eating = ft_calloc(sizeof(pthread_mutex_t) * data->nb_philo)))
+	if (!(monitor->is_eating = ft_calloc(sizeof(pthread_mutex_t) *
+		data->nb_philo)))
 		return (ft_error("Error: malloc fail\n"));
-	if (pthread_mutex_init(&monitor->stdout_mutex, NULL) != 0) 
-		return(ft_error("Error: mutex initialization failed!\n"));
+	if (pthread_mutex_init(&monitor->stdout_mutex, NULL) != 0)
+		return (ft_error("Error: mutex initialization failed!\n"));
 	i = -1;
 	while (++i < data->nb_philo)
 	{
 		if (pthread_mutex_init(&monitor->forks[i], NULL) != 0)
-			return(ft_error("Error: mutex initialization failed!\n"));
+			return (ft_error("Error: mutex initialization failed!\n"));
 	}
-		i = -1;
+	i = -1;
 	while (++i < data->nb_philo)
 	{
 		if (pthread_mutex_init(&monitor->is_eating[i], NULL) != 0)
-			return(ft_error("Error: mutex initialization failed!\n"));
+			return (ft_error("Error: mutex initialization failed!\n"));
 	}
 	return (0);
 }
 
-int		check_value(char *s)
+int			check_value(char *s)
 {
 	while (*s)
 	{
@@ -74,7 +70,7 @@ int		check_value(char *s)
 	return (0);
 }
 
-int		init_data(t_data *data, int argc, char **argv)
+int			init_data(t_data *data, int argc, char **argv)
 {
 	int i;
 
