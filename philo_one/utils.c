@@ -6,13 +6,13 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 16:24:11 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 12:33:21 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 16:58:35 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	free_monitor(t_data *data, t_monitor *monitor)
+void			free_monitor(t_data *data, t_monitor *monitor)
 {
 	int i;
 
@@ -27,7 +27,7 @@ void	free_monitor(t_data *data, t_monitor *monitor)
 		free(monitor->forks);
 }
 
-void	*ft_calloc(size_t len)
+void			*ft_calloc(size_t len)
 {
 	void	*str;
 
@@ -48,5 +48,5 @@ unsigned long	get_timestamp(void)
 	struct timeval tv;
 
 	gettimeofday(&tv, NULL);
-	return (tv.tv_usec / 1000 + tv.tv_sec * 1000); //(secondes et microsecondes)
+	return (tv.tv_usec / 1000 + tv.tv_sec * 1000);
 }

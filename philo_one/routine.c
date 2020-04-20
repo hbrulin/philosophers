@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 15:02:01 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 12:35:21 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 16:56:48 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	display(const t_philo *philo, t_status status)
 {
 	pthread_mutex_lock(&philo->monitor->stdout_mutex);
 	if (g_stop)
-		return;
+		return ;
 	ft_putnbr(get_timestamp());
 	ft_putchar(' ');
 	ft_putnbr(philo->id + 1);
@@ -35,25 +35,26 @@ void	display(const t_philo *philo, t_status status)
 	pthread_mutex_unlock(&philo->monitor->stdout_mutex);
 }
 
-
 void	eat(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->monitor->forks[philo->id]);
 	display(philo, FORK_IN_USE);
-	pthread_mutex_lock(&philo->monitor->forks[(philo->id + 1) % philo->data->nb_philo]);
+	pthread_mutex_lock(&philo->monitor->forks[(philo->id + 1) %
+		philo->data->nb_philo]);
 	display(philo, FORK_IN_USE);
 	display(philo, EATING);
 	philo->last_eat = get_timestamp();
 	pthread_mutex_lock(&philo->monitor->is_eating[philo->id]);
-	usleep(philo->data->time_to_eat * 1000); 
+	usleep(philo->data->time_to_eat * 1000);
 	pthread_mutex_unlock(&philo->monitor->forks[philo->id]);
-	pthread_mutex_unlock(&philo->monitor->forks[(philo->id + 1) % philo->data->nb_philo]);
+	pthread_mutex_unlock(&philo->monitor->forks[(philo->id + 1) %
+		philo->data->nb_philo]);
 	pthread_mutex_unlock(&philo->monitor->is_eating[philo->id]);
 }
 
 void	*routine(void *philo_void)
 {
-	t_philo	*philo;
+	t_philo		*philo;
 	int			i;
 
 	philo = philo_void;
@@ -66,7 +67,7 @@ void	*routine(void *philo_void)
 			display(philo, DONE);
 			g_stop = 1;
 			usleep(8 * 1000);
-			break;
+			break ;
 		}
 		display(philo, THINKING);
 		display(philo, SLEEPING);

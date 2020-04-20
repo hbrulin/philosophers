@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 15:02:54 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 13:26:40 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 16:55:14 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*monitor_routine(void *philo_void)
 {
-	t_philo		*philo;
+	t_philo			*philo;
 	unsigned long	time;
 
 	philo = philo_void;
@@ -27,8 +27,8 @@ void	*monitor_routine(void *philo_void)
 			display(philo, DEAD);
 			g_stop = 1;
 		}
-		pthread_mutex_unlock(&philo->monitor->is_eating[philo->id]); //ne pas manger et mourir en même temps
-		usleep(8 * 1000); // voir pour ça
+		pthread_mutex_unlock(&philo->monitor->is_eating[philo->id]);
+		usleep(8 * 1000);
 	}
 	return (NULL);
 }
@@ -40,8 +40,9 @@ int		ft_monitor(t_philo *philo, int nb)
 	i = -1;
 	while (++i < nb)
 	{
-		if (pthread_create(&philo[i].monitor_thread, NULL, &monitor_routine, &philo[i]) != 0)
-			return(ft_error("Error: pthread create failed!\n"));
+		if (pthread_create(&philo[i].monitor_thread, NULL, &monitor_routine,
+			&philo[i]) != 0)
+			return (ft_error("Error: pthread create failed!\n"));
 	}
 	i = -1;
 	while (++i < nb)
