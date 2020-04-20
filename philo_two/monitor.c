@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 15:02:54 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/17 15:13:37 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 13:31:01 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	*monitor_routine(void *philo_void)
 		}
 		usleep(8 * 1000);
 	}
-	exit (0);
+	//exit (0);
 	return (NULL);
 }
 
@@ -44,9 +44,15 @@ int		ft_monitor(t_philo *philo, int nb)
 	}
 	i = -1;
 	while (++i < nb)
-		pthread_join(philo[i].monitor_thread, NULL);
+	{
+		if (!pthread_join(philo[i].monitor_thread, NULL))
+			return (0);
+	}
 	i = -1;
 	while (++i < nb)
-		pthread_join(philo[i].thread, NULL);
+	{
+		if (!pthread_join(philo[i].thread, NULL))
+			return (0);
+	}
 	return (0);
 }
