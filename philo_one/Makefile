@@ -15,7 +15,7 @@ opti :
 all : $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -o $(NAME) -g
+	$(CC) $(OBJ) -o $(NAME) -g 
 	@echo "$(NAME) created"
 
 $(BUILD_DIR)/%.o: %.c Makefile

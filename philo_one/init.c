@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 17:03:17 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 12:40:24 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 13:12:56 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ int		init_philos(t_data *data, t_monitor *monitor)
 			return(ft_error("Error: thread initialization failed!\n"));
 		usleep(100); //voir poru ça
 	}
-	if (ft_monitor(philo, data->nb_philo))
+	/*if (ft_monitor(philo, data->nb_philo))
 	{
 		free(philo);
 		return (1);
-	}
+	}*/
+	ft_monitor(philo, data->nb_philo);
 	free(philo);
 	return (0);
 }

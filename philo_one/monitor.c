@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 15:02:54 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 12:36:42 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/20 13:26:40 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	*monitor_routine(void *philo_void)
 		pthread_mutex_unlock(&philo->monitor->is_eating[philo->id]); //ne pas manger et mourir en même temps
 		usleep(8 * 1000); // voir pour ça
 	}
-	exit (0);
 	return (NULL);
 }
 
@@ -46,9 +45,15 @@ int		ft_monitor(t_philo *philo, int nb)
 	}
 	i = -1;
 	while (++i < nb)
-		pthread_join(philo[i].monitor_thread, NULL);
+	{
+		if (!pthread_join(philo[i].monitor_thread, NULL))
+			return (0);
+	}
 	i = -1;
 	while (++i < nb)
-		pthread_join(philo[i].thread, NULL);
+	{
+		if (!pthread_join(philo[i].thread, NULL))
+			return (0);
+	}
 	return (0);
 }
