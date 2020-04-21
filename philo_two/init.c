@@ -35,7 +35,7 @@ int			init_philos(t_data *data, t_monitor *monitor)
 
 int			open_sesame(sem_t **sem, char *name, int ressources)
 {
-	//sem_unlink(name); //pas besoin si j'exit bien
+	sem_unlink(name);
 	*sem = sem_open(name, O_CREAT, 0666, ressources);
 	if (!*sem || *sem == SEM_FAILED)
 		return (ft_error("Error: semaphore not created\n"));

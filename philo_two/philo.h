@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <semaphore.h>
+# include <fcntl.h>
 
 # define S_FORKS "sem_forks"
 # define S_STDOUT "sem_stdout"

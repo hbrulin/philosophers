@@ -43,6 +43,7 @@ int		ft_monitor(t_philo *philo, int nb)
 		if (pthread_create(&philo[i].monitor_thread, NULL,
 			&monitor_routine, &philo[i]) != 0)
 			return (ft_error("Error: pthread create failed!\n"));
+		usleep(100);
 	}
 	i = -1;
 	while (++i < nb)

@@ -13,16 +13,16 @@
 #ifndef PHILO_H
 # define PHILO_H
 
-#include <sys/time.h>
-#include <pthread.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <semaphore.h>
-#include <signal.h>
+# include <sys/time.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdbool.h>
+# include <semaphore.h>
+# include <signal.h>
+# include <fcntl.h>
 
-#define S_FORKS "sem_forks"
-#define S_STDOUT "sem_stdout"
+# define S_FORKS "sem_forks"
+# define S_STDOUT "sem_stdout"
 
 bool	g_stop;
 
@@ -61,7 +61,6 @@ typedef struct		s_philo
 	t_monitor			*monitor;
 	unsigned long		last_eat;
 	pid_t				pid;
-	pthread_t			monitor_thread;
 }					t_philo;
 
 unsigned long	get_timestamp(void);

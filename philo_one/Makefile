@@ -15,12 +15,12 @@ opti :
 all : $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -o $(NAME) -g 
+	$(CC) $(OBJ) -o $(NAME) -g -lpthread
 	@echo "$(NAME) created"
 
 $(BUILD_DIR)/%.o: %.c Makefile
 	@mkdir -p $(BUILD_DIR)
-	$(CC) $(CFLAGS) -o $@ -c $<
+	$(CC) $(CFLAGS) -o $@ -c $< -lpthreads
 
 clean:
 	@/bin/rm -rf $(BUILD_DIR)
