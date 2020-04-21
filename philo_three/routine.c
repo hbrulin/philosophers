@@ -55,6 +55,7 @@ int		routine(t_philo *philo)
 	int			i;
 
 	i = 0;
+	usleep(1);
 	if (pthread_create(&philo[i].monitor_thread, NULL,
 		&monitor_routine, &philo[i]) != 0)
 		return (ft_error("Error: pthread create failed!\n"));
@@ -65,7 +66,7 @@ int		routine(t_philo *philo)
 		{
 			display(philo, DONE);
 			g_stop = 1;
-			usleep(8 * 1000);
+			//usleep(8 * 1000);
 			break ;
 		}
 		display(philo, THINKING);
