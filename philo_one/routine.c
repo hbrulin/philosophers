@@ -69,9 +69,9 @@ void	*routine(void *philo_void)
 			usleep(8 * 1000);
 			break ;
 		}
-		display(philo, THINKING);
 		display(philo, SLEEPING);
 		usleep(philo->data->time_to_sleep * 1000);
+		display(philo, THINKING);
 	}
 	return (NULL);
 }

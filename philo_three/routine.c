@@ -66,12 +66,12 @@ int		routine(t_philo *philo)
 		{
 			display(philo, DONE);
 			g_stop = 1;
-			//usleep(8 * 1000);
+			usleep(8 * 1000);
 			break ;
 		}
-		display(philo, THINKING);
 		display(philo, SLEEPING);
 		usleep(philo->data->time_to_sleep * 1000);
+		display(philo, THINKING);
 	}
 	exit(0);
 	return (0);
