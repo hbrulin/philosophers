@@ -55,6 +55,9 @@ gcc -lpthread main.c (for Unix)
 #Multitasking
 there are two types of multitasking: process-based(philo three) and thread-based (philo one and two).
 
+#Philo3 utilisation de waitpid :
+Lui passer -1 fait que waitpid attend n'importe lequel des processus fils.
+
 #ressources : 
 - https://dev.to/quantumsheep/basics-of-multithreading-in-c-4pam
 - https://openclassrooms.com/en/courses/

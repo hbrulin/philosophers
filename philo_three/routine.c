@@ -65,7 +65,7 @@ int		routine(t_philo *philo)
 		{
 			display(philo, DONE);
 			g_stop = 1;
-			//usleep(8 * 1000); A VOIR
+			usleep(8 * 1000);
 			break ;
 		}
 		display(philo, THINKING);

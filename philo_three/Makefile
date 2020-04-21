@@ -15,7 +15,7 @@ opti :
 all : $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -o $(NAME) -g
+	$(CC) $(OBJ) -o $(NAME) -g -lpthread
 	@echo "$(NAME) created"
 
 $(BUILD_DIR)/%.o: %.c Makefile
@@ -24,7 +24,7 @@ $(BUILD_DIR)/%.o: %.c Makefile
 
 clean:
 	@/bin/rm -rf $(BUILD_DIR)
-	@echo "Object and DPD files deleted"
+	@echo "Object and DPD files deleted" -lpthread
 
 fclean: clean
 	@/bin/rm -f $(NAME)

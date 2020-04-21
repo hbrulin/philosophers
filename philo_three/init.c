@@ -26,7 +26,7 @@ int			init_philos(t_data *data, t_monitor *monitor)
 			.last_eat = data->start };
 		if (!(philo[i].pid = fork()))
 			routine(&philo[i]);
-		usleep(100);
+		usleep(10);
 	}
 	ft_wait(philo, data->nb_philo);
 	free(philo);
@@ -35,7 +35,7 @@ int			init_philos(t_data *data, t_monitor *monitor)
 
 int			open_sesame(sem_t **sem, char *name, int ressources)
 {
-	sem_unlink(name); //voir si besoin
+	sem_unlink(name);
 	*sem = sem_open(name, O_CREAT, 0666, ressources);
 	if (!*sem || *sem == SEM_FAILED)
 		return (ft_error("Error: semaphore not created\n"));

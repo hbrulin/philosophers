@@ -26,8 +26,9 @@ void	*monitor_routine(void *philo_void)
 		{
 			display(philo, DEAD);
 			g_stop = 1;
+			exit(0);
 		}
-		//usleep(8 * 1000); a voir
+		usleep(8 * 1000);
 		sem_post(philo->monitor->is_eating[philo->id]);
 	}
 	exit(0);
