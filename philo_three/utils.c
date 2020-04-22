@@ -30,10 +30,10 @@ void			*ft_calloc(size_t len)
 {
 	void	*str;
 
-	if (!(str = malloc(len)))
+	if (!(ret = malloc(len)))
 		return (NULL);
-	ft_bzero(str, len);
-	return (str);
+	ft_bzero(ret, len);
+	return (ret);
 }
 
 int				ft_error(char *s)
