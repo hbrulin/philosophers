@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 17:03:17 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 17:05:40 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/27 15:28:06 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int			init_monitor(t_data *data, t_monitor *monitor)
 		if (open_sesame(&monitor->is_eating[i], monitor->names[i], 1))
 			return (1);
 	}
+	monitor->max_eat = data->nb_philo;
 	return (0);
 }
 

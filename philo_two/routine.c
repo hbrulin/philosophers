@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 15:02:01 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 17:13:51 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/27 15:31:06 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ void	display(const t_philo *philo, t_status status)
 	sem_wait(philo->monitor->stdout_sem);
 	if (g_stop)
 		return ;
+	if (status == DONE)
+	{
+		ft_putnbr(get_timestamp());
+		ft_putstr(" Philosophers have eaten enough\n");
+		return ;
+	}
 	ft_putnbr(get_timestamp());
 	ft_putchar(' ');
 	ft_putnbr(philo->id + 1);
@@ -28,8 +34,6 @@ void	display(const t_philo *philo, t_status status)
 		ft_putstr(" is sleeping\n");
 	else if (status == FORK_IN_USE)
 		ft_putstr(" has taken a fork\n");
-	else if (status == DONE)
-		ft_putstr(" has eaten enough\n");
 	else if (status == DEAD)
 		ft_putstr(" died\n");
 	sem_post(philo->monitor->stdout_sem);
@@ -62,8 +66,12 @@ void	*routine(void *philo_void)
 		eat(philo);
 		if (++i >= philo->data->must_eat_nb && philo->data->must_eat_nb != 0)
 		{
-			display(philo, DONE);
-			g_stop = 1;
+			philo->monitor->max_eat--;
+			if (!philo->monitor->max_eat)
+			{
+				display(philo, DONE);
+				g_stop = 1;
+			}
 			usleep(8 * 1000);
 			break ;
 		}

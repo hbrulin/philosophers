@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 15:02:01 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/27 15:24:56 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/27 15:30:55 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@ void	display(const t_philo *philo, t_status status)
 		return ;
 	if (status == DONE)
 	{
-		ft_putstr("Philosophers have eaten enough\n");
+		ft_putnbr(get_timestamp());
+		ft_putstr(" Philosophers have eaten enough\n");
 		return ;
 	}
-	ft_putnbr(get_timestamp());
-	ft_putchar(' ');
 	ft_putnbr(philo->id + 1);
 	if (status == EATING)
 		ft_putstr(" is eating\n");
