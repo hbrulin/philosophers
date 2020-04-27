@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 17:03:17 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 16:52:18 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/27 15:21:46 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int			init_monitor(t_data *data, t_monitor *monitor)
 		if (pthread_mutex_init(&monitor->is_eating[i], NULL) != 0)
 			return (ft_error("Error: mutex initialization failed!\n"));
 	}
+	monitor->max_eat = data->nb_philo;
 	return (0);
 }
 

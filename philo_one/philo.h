@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 16:24:20 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 16:49:01 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/04/27 15:17:51 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct			s_data
 
 typedef struct			s_monitor
 {
+	int					max_eat;
 	pthread_mutex_t		stdout_mutex;
 	pthread_mutex_t		*forks;
 	pthread_mutex_t		*is_eating;
