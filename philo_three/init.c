@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 17:03:17 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/05/07 18:43:05 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/05/07 18:44:59 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ void *monitor_count(t_data *data, t_monitor *monitor)
 	sem_wait(monitor->stdout_sem);
 	ft_putnbr(get_timestamp());
 	ft_putstr(" Philosophers have eaten enough\n");
-	sem_post(monitor->stdout_sem);
 	exit (0);
+	//sem_post(monitor->stdout_sem);
+	//exit (0);
 }
 
 int start_monitor_count(t_data *data, t_monitor *monitor)
