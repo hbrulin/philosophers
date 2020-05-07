@@ -89,5 +89,6 @@ void					*monitor_routine(void *philo_void);
 void					ft_tabdel(void **tab);
 int						init_names(t_data *data, t_monitor *monitor);
 int						init_max_names(t_data *data, t_monitor *monitor);
+int						start_monitor_count(t_data *data, t_monitor *monitor);
 
 #endif
