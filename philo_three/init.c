@@ -30,7 +30,6 @@ void *monitor_count(t_data *data, t_monitor *monitor)
 	ft_putstr(" Philosophers have eaten enough\n");
 	exit (0);
 	//sem_post(monitor->stdout_sem);
-	//exit (0);
 }
 
 int start_monitor_count(t_data *data, t_monitor *monitor)

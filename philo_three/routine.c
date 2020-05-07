@@ -29,7 +29,10 @@ void	display(const t_philo *philo, t_status status)
 	else if (status == FORK_IN_USE)
 		ft_putstr(" has taken a fork\n");
 	else if (status == DEAD)
+	{
 		ft_putstr(" died\n");
+		return;
+	}
 	sem_post(philo->monitor->stdout_sem);
 }
 

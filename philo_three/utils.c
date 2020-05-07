@@ -21,7 +21,9 @@ void			free_monitor(t_data *data, t_monitor *monitor)
 	while (++i < data->nb_philo)
 		sem_unlink(monitor->names[i]);
 	ft_tabdel((void *)monitor->names);
+	ft_tabdel((void *)monitor->names_eat_max);
 	free(monitor->is_eating);
+	free(monitor->eat_count_m);
 	sem_unlink(S_STDOUT);
 	return ;
 }
