@@ -57,8 +57,10 @@ void	eat(t_philo *philo)
 int		routine(t_philo *philo)
 {
 	int			i;
+	int			total;
 
 	i = 0;
+	total = 0;
 	usleep(1);
 	if (pthread_create(&philo[i].monitor_thread, NULL,
 		&monitor_routine, &philo[i]) != 0)
@@ -66,6 +68,12 @@ int		routine(t_philo *philo)
 	while (1)
 	{
 		eat(philo);
+		total++;
+		if (total == philo->data->must_eat_nb && philo->data->must_eat_nb != 0)
+		{
+			while (1)
+				;
+		}
 		display(philo, SLEEPING);
 		usleep(philo->data->time_to_sleep * 1000);
 		display(philo, THINKING);
