@@ -23,6 +23,8 @@ void	display(const t_philo *philo, t_status status)
 		ft_putstr(" Philosophers have eaten enough\n");
 		return ;
 	}
+	ft_putnbr(get_timestamp());
+	ft_putchar(' ');
 	ft_putnbr(philo->id + 1);
 	if (status == EATING)
 		ft_putstr(" is eating\n");
