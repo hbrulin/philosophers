@@ -30,8 +30,8 @@ void	display(const t_philo *philo, t_status status)
 		ft_putstr(" has taken a fork\n");
 	else if (status == DEAD)
 	{
-		ft_putstr(" died\n");
-		return;
+		ft_putstr(" died");
+		return ;
 	}
 	sem_post(philo->monitor->stdout_sem);
 }
@@ -68,6 +68,5 @@ int		routine(t_philo *philo)
 		usleep(philo->data->time_to_sleep * 1000);
 		display(philo, THINKING);
 	}
-	//exit(0);
 	return (0);
 }

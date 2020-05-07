@@ -12,6 +12,35 @@
 
 #include "philo.h"
 
+void	*monitor_count(t_data *data, t_monitor *monitor)
+{
+	int		total;
+	int		i;
+
+	total = 0;
+	while (total < data->must_eat_nb)
+	{
+		i = 0;
+		while (i < data->nb_philo)
+			sem_wait(monitor->eat_count_m[i++]);
+		total++;
+	}
+	sem_wait(monitor->stdout_sem);
+	ft_putnbr(get_timestamp());
+	ft_putstr(" Philosophers have eaten enough\n");
+	exit(0);
+}
+
+int		start_monitor_count(t_data *data, t_monitor *monitor)
+{
+	if (data->must_eat_nb > 0)
+	{
+		if (!(monitor->pid_count = fork()))
+			monitor_count(data, monitor);
+	}
+	return (0);
+}
+
 void	*monitor_routine(void *philo_void)
 {
 	t_philo			*philo;
