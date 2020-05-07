@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 15:02:54 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 17:28:59 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/05/07 18:39:07 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int		ft_wait(t_philo *philo, int nb)
 			i = -1;
 			while (++i < nb)
 				kill(philo[i].pid, SIGINT);
+			kill(philo->monitor->pid_count, SIGINT);
 			return (0);
 		}
 	}

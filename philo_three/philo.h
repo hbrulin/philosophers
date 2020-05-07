@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 16:24:20 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 16:36:30 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/05/07 18:36:34 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ typedef struct			s_monitor
 	sem_t				*stdout_sem;
 	sem_t				**is_eating;
 	char				**names;
+	char				**names_eat_max;
+	sem_t				**eat_count_m;
+	pid_t				pid_count;
 }						t_monitor;
 
 typedef struct			s_philo
@@ -85,5 +88,6 @@ void					free_monitor(t_data *data, t_monitor *monitor);
 void					*monitor_routine(void *philo_void);
 void					ft_tabdel(void **tab);
 int						init_names(t_data *data, t_monitor *monitor);
+int						init_max_names(t_data *data, t_monitor *monitor);
 
 #endif

@@ -15,7 +15,7 @@ opti :
 all : $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -o $(NAME) -g -lpthread
+	$(CC) $(OBJ) -o $(NAME) -g -lpthread -fsanitize=address
 	@echo "$(NAME) created"
 
 $(BUILD_DIR)/%.o: %.c Makefile
@@ -24,7 +24,7 @@ $(BUILD_DIR)/%.o: %.c Makefile
 
 clean:
 	@/bin/rm -rf $(BUILD_DIR)
-	@echo "Object and DPD files deleted" -lpthread
+	@echo "Object and DPD files deleted"
 
 fclean: clean
 	@/bin/rm -f $(NAME)

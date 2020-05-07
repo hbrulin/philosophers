@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 16:24:11 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 17:31:40 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/05/07 18:18:39 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void			free_monitor(t_data *data, t_monitor *monitor)
 
 void			*ft_calloc(size_t len)
 {
-	void	*str;
+	void	*ret;
 
 	if (!(ret = malloc(len)))
 		return (NULL);

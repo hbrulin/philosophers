@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 15:02:01 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 17:30:37 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/05/07 18:42:21 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	display(const t_philo *philo, t_status status)
 		ft_putstr(" is sleeping\n");
 	else if (status == FORK_IN_USE)
 		ft_putstr(" has taken a fork\n");
-	else if (status == DONE)
-		ft_putstr(" has eaten enough\n");
 	else if (status == DEAD)
 		ft_putstr(" died\n");
 	sem_post(philo->monitor->stdout_sem);
@@ -48,6 +46,7 @@ void	eat(t_philo *philo)
 	sem_post(philo->monitor->forks);
 	sem_post(philo->monitor->forks);
 	sem_post(philo->monitor->is_eating[philo->id]);
+	sem_post(philo->monitor->eat_count_m[philo->id]);
 }
 
 int		routine(t_philo *philo)
@@ -62,17 +61,10 @@ int		routine(t_philo *philo)
 	while (1)
 	{
 		eat(philo);
-		if (++i >= philo->data->must_eat_nb && philo->data->must_eat_nb != 0)
-		{
-			display(philo, DONE);
-			g_stop = 1;
-			usleep(8 * 1000);
-			break ;
-		}
 		display(philo, SLEEPING);
 		usleep(philo->data->time_to_sleep * 1000);
 		display(philo, THINKING);
 	}
-	exit(0);
+	//exit(0);
 	return (0);
 }

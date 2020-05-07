@@ -6,7 +6,7 @@
 /*   By: hbrulin <hbrulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/20 17:05:24 by hbrulin           #+#    #+#             */
-/*   Updated: 2020/04/20 17:05:57 by hbrulin          ###   ########.fr       */
+/*   Updated: 2020/05/07 17:49:48 by hbrulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,21 @@ int			init_names(t_data *data, t_monitor *monitor)
 		i++;
 	}
 	monitor->names[i] = NULL;
+	return (0);
+}
+
+int			init_max_names(t_data *data, t_monitor *monitor)
+{
+	int i;
+
+	i = 0;
+	if (!(monitor->names_eat_max = malloc(sizeof(char *) * data->nb_philo + 1)))
+		return (1);
+	while (i < data->nb_philo)
+	{
+		monitor->names_eat_max[i] = create_name();
+		i++;
+	}
+	monitor->names_eat_max[i] = NULL;
 	return (0);
 }
