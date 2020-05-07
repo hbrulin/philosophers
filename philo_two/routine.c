@@ -41,10 +41,12 @@ void	display(const t_philo *philo, t_status status)
 
 void	eat(t_philo *philo)
 {
+	sem_wait(philo->monitor->order);
 	sem_wait(philo->monitor->forks);
 	display(philo, FORK_IN_USE);
 	sem_wait(philo->monitor->forks);
 	display(philo, FORK_IN_USE);
+	sem_post(philo->monitor->order);
 	display(philo, EATING);
 	sem_wait(philo->monitor->is_eating[philo->id]);
 	philo->last_eat = get_timestamp();

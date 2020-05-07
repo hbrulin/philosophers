@@ -23,6 +23,7 @@ void			free_monitor(t_data *data, t_monitor *monitor)
 	while (i < data->nb_philo)
 		pthread_mutex_destroy(&monitor->is_eating[i++]);
 	pthread_mutex_destroy(&monitor->stdout_mutex);
+	pthread_mutex_destroy(&monitor->order);
 	if (monitor->forks)
 		free(monitor->forks);
 }

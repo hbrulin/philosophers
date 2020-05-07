@@ -41,11 +41,13 @@ void	display(const t_philo *philo, t_status status)
 
 void	eat(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->monitor->order);
 	pthread_mutex_lock(&philo->monitor->forks[philo->id]);
 	display(philo, FORK_IN_USE);
 	pthread_mutex_lock(&philo->monitor->forks[(philo->id + 1) %
 		philo->data->nb_philo]);
 	display(philo, FORK_IN_USE);
+	pthread_mutex_unlock(&philo->monitor->order);
 	display(philo, EATING);
 	philo->last_eat = get_timestamp();
 	pthread_mutex_lock(&philo->monitor->is_eating[philo->id]);

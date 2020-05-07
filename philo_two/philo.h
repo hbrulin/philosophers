@@ -50,6 +50,7 @@ typedef struct			s_monitor
 {
 	int					max_eat;
 	sem_t				*forks;
+	sem_t				*order;
 	sem_t				*stdout_sem;
 	sem_t				**is_eating;
 	char				**names;

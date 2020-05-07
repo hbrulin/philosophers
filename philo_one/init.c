@@ -44,6 +44,8 @@ int			init_monitor(t_data *data, t_monitor *monitor)
 		return (ft_error("Error: malloc fail\n"));
 	if (pthread_mutex_init(&monitor->stdout_mutex, NULL) != 0)
 		return (ft_error("Error: mutex initialization failed!\n"));
+	if (pthread_mutex_init(&monitor->order, NULL) != 0)
+		return (ft_error("Error: mutex initialization failed!\n"));
 	i = -1;
 	while (++i < data->nb_philo)
 	{
