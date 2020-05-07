@@ -52,6 +52,7 @@ typedef struct			s_data
 typedef struct			s_monitor
 {
 	sem_t				*forks;
+	sem_t				*order;
 	sem_t				*stdout_sem;
 	sem_t				**is_eating;
 	char				**names;

@@ -54,6 +54,8 @@ int			init_monitor(t_data *data, t_monitor *monitor)
 	if (open_sesame(&monitor->forks, S_FORKS, data->nb_philo) ||
 		open_sesame(&monitor->stdout_sem, S_STDOUT, 1))
 		return (1);
+	if (open_sesame(&monitor->order, "order", 1))
+		return (1);
 	if (!(monitor->is_eating = ft_calloc(sizeof(sem_t *) * data->nb_philo)))
 		return (1);
 	i = -1;
