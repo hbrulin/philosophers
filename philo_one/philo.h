@@ -44,7 +44,6 @@ typedef struct			s_data
 typedef struct			s_monitor
 {
 	int					max_eat;
-	pthread_mutex_t		order;
 	pthread_mutex_t		stdout_mutex;
 	pthread_mutex_t		*forks;
 	pthread_mutex_t		*is_eating;

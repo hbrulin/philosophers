@@ -41,21 +41,28 @@ void	display(const t_philo *philo, t_status status)
 
 void	eat(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->monitor->order);
-	pthread_mutex_lock(&philo->monitor->forks[philo->id]);
+	if (philo->id == 1)
+	{
+		pthread_mutex_lock(&philo->monitor->forks[(philo->id + 1) %
+			philo->data->nb_philo]);
+		pthread_mutex_lock(&philo->monitor->forks[philo->id]);
+	}
+	else
+	{
+		pthread_mutex_lock(&philo->monitor->forks[philo->id]);
+		pthread_mutex_lock(&philo->monitor->forks[(philo->id + 1) %
+			philo->data->nb_philo]);
+	}
 	display(philo, FORK_IN_USE);
-	pthread_mutex_lock(&philo->monitor->forks[(philo->id + 1) %
-		philo->data->nb_philo]);
 	display(philo, FORK_IN_USE);
-	pthread_mutex_unlock(&philo->monitor->order);
 	display(philo, EATING);
 	philo->last_eat = get_timestamp();
 	pthread_mutex_lock(&philo->monitor->is_eating[philo->id]);
 	usleep(philo->data->time_to_eat * 1000);
+	pthread_mutex_unlock(&philo->monitor->is_eating[philo->id]);
 	pthread_mutex_unlock(&philo->monitor->forks[philo->id]);
 	pthread_mutex_unlock(&philo->monitor->forks[(philo->id + 1) %
 		philo->data->nb_philo]);
-	pthread_mutex_unlock(&philo->monitor->is_eating[philo->id]);
 }
 
 void	*routine(void *philo_void)

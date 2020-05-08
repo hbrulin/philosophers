@@ -23,9 +23,10 @@ void			free_monitor(t_data *data, t_monitor *monitor)
 	while (i < data->nb_philo)
 		pthread_mutex_destroy(&monitor->is_eating[i++]);
 	pthread_mutex_destroy(&monitor->stdout_mutex);
-	pthread_mutex_destroy(&monitor->order);
 	if (monitor->forks)
 		free(monitor->forks);
+	if (monitor->is_eating)
+		free(monitor->is_eating);
 }
 
 void			*ft_calloc(size_t len)

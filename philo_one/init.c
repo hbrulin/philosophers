@@ -26,7 +26,6 @@ int			init_philos(t_data *data, t_monitor *monitor)
 			.last_eat = data->start };
 		if (pthread_create(&philo[i].thread, NULL, &routine, &philo[i]) != 0)
 			return (ft_error("Error: thread initialization failed!\n"));
-		usleep(100);
 	}
 	ft_monitor(philo, data->nb_philo);
 	free(philo);
@@ -43,8 +42,6 @@ int			init_monitor(t_data *data, t_monitor *monitor)
 		data->nb_philo)))
 		return (ft_error("Error: malloc fail\n"));
 	if (pthread_mutex_init(&monitor->stdout_mutex, NULL) != 0)
-		return (ft_error("Error: mutex initialization failed!\n"));
-	if (pthread_mutex_init(&monitor->order, NULL) != 0)
 		return (ft_error("Error: mutex initialization failed!\n"));
 	i = -1;
 	while (++i < data->nb_philo)
